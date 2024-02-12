@@ -61,7 +61,7 @@ holdBtn.addEventListener('click', function () {
   currentScore = 0;
   document.getElementById(`current--${activePlayer}`).textContent =
     currentScore;
-  if (scores[activePlayer] >= 10) {
+  if (scores[activePlayer] >= 100) {
     dice.classList.add('hidden');
     document
       .getElementById(`player--${activePlayer}`)
