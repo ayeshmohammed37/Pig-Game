@@ -11,11 +11,12 @@ const rollBtn = document.querySelector('.roll-btn');
 const holdBtn = document.querySelector('.hold-btn');
 const newBtn = document.querySelector('.new-btn');
 
-let scores, currentScore;
+let scores, currentScore, activePlayer;
 
 const initalState = function () {
   scores = [0, 0];
   currentScore = 0;
+  activePlayer = 0;
   player0.classList.add('active-player');
   score0.textContent = 0;
   score1.textContent = 0;
@@ -24,7 +25,17 @@ const initalState = function () {
   dice.classList.add('hidden');
 };
 
-const switchPlayer = function () {};
+const switchPlayer = function () {
+  player0.classList.toggle('active-player');
+  player1.classList.toggle('active-player');
+  scores[activePlayer] += currentScore;
+  document.getElementById(`score--${activePlayer}`).textContent =
+    scores[activePlayer];
+  currentScore = 0;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentScore;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+};
 
 initalState();
 
@@ -36,5 +47,8 @@ rollBtn.addEventListener('click', function () {
   if (number === 1) {
     switchPlayer();
   } else {
+    currentScore += number;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
   }
 });
